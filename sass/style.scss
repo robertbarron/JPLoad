@@ -1,0 +1,143 @@
+@import url("./normalize.css");
+@import url("./foundation.css");
+
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body {
+	font-size: 14px;
+}
+a {
+	text-transform: none;
+	text-decoration: none;
+	color: #fff;
+}
+.clear {
+	clear: both;
+}
+.button {
+	border-radius: 3px;
+	padding: 14px 36px;
+	text-align: center;
+	cursor: pointer;
+	width:46%;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	transition: all 0.5s;
+	
+	&:hover {
+		-webkit-transition: all 0.5s;
+		-moz-transition: all 0.5s;
+		-o-transition: all 0.5s;
+		-ms-transition: all 0.5s;
+	}
+	&.bg {
+		background: #8b2016;
+		border: solid 1px #8b2016;
+		color:#fff;
+		float: right;
+		margin-left: 4%;
+		&:hover {
+			border: solid 1px #49110c;
+			background: #49110c;
+		}
+	}
+	&.nobg {
+		border: solid 1px #fff;
+		float: left;
+		&:hover {
+			background: #fff;
+			color: #111;
+		}
+	}
+}
+
+.button_containers {
+	padding:0 20%;
+	margin: 0 auto;
+}
+
+h1 {
+	font-size: 3em;
+}
+h2 {
+	font-size: 2em;
+	font-weight: 100;
+}
+h3 {
+	font-size: 1em;
+}
+
+#skeleton {
+	> div {
+		&:nth-child(2n+0) {
+			box-shadow: inset 0px 1px 4px #000;
+		}
+		&#first-div {
+			color: #ffffff;
+			margin: 0 auto;
+			text-align: center;
+			padding-top: 160px; padding-bottom: 200px; 
+			-webkit-background-size: cover; 
+			background-size: cover;
+			background: url(../images/first-div.jpg) fixed center top no-repeat;
+			background-color: #fff;
+			background-repeat: no-repeat;
+
+			h2 {
+				margin-bottom: 50px;
+			}
+			a {
+				div.size {
+					font-size: 0.7em;
+					color: #000;
+					font-weight: 900;
+					margin-top: 3px;
+				}
+			}
+		}
+
+		&#second-div {
+			color: #49110c;
+			margin: 0 auto;
+			text-align: center;
+			padding-top: 120px; padding-bottom: 120px; 
+			background: #e3e3e3;
+			
+			h2 {
+				margin-bottom: 40px;
+			}
+		}
+
+		&#third-div {
+			color: #ffffff;
+			margin: 0 auto;
+			text-align: center;
+			padding-top: 100px; padding-bottom: 120px; 
+			background: #3b767a; /* Old browsers */
+			h1 {
+				margin-bottom: 40px;
+			}
+		}
+
+		&#fourth-div {
+			color: #ffffff;
+			margin: 0 auto;
+			text-align: center;
+			padding-top: 120px; padding-bottom: 100px; 
+			background: #ad4b42;
+			
+			h2 {
+				margin-top: 50px;
+				margin-bottom: 50px;
+			}
+		}
+	}
+}
