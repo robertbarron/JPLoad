@@ -1,4 +1,4 @@
-<img src="http://images.robertobarron.com/jpload/jpload.png" width="395" height="100">
+<img src="http://images.robertobarron.com/jpload/jpload.png" width="500" height="100">
 
 JPLoad is a small library that allows you to develop fast an reliable single page website applications.
 
@@ -12,3 +12,108 @@ JPLoad is a small library that allows you to develop fast an reliable single pag
 
 ## What's Included
 JPLoad does not attempt to be a full, batteries-included framework. Instead, it tries to simplify the development by allowing the developer to use the library in the most appropiate way for their application.
+
+#### Including the library into your main html file (Usually index.html)
+```
+<html>
+<head></head>
+<body>
+ <div id="app"></div>
+...
+<script src="js/JPLoad.min.js"></script>
+</body>
+</html>
+```
+#### Declaring the hook
+
+You need to declare a root element. The entire application will be created inside this element.
+##### Javascript
+```javascript
+var hook = document.getElementById('app');
+...
+if (response) {
+	hook.innerHTML = response;
+}
+```
+
+##### jQuery
+```javascript
+var hook = $('#app');
+...
+if (response) {
+	hook.html(response);
+}
+```
+#### Requesting the template file
+
+Template are html files that are injected into our application via Ajax.
+```javascript
+JPLoad.getTemplate('templates/init.html', function (response) {
+	if (response) {}  //The template data resides in the response variable.
+});
+```
+
+#### Injecting the template file
+
+Template data can be injected into the element with the id **'div-id'**
+```javascript
+JPLoad.loadTemplate(response, 'div-id');
+```
+
+#### Asynchronous request of templates
+Templates will be loaded as their call finished.
+```javascript
+JPLoad.getTemplate('templates/second.html', function (response) {
+	JPLoad.loadTemplate(response, 'second-div');
+});
+
+JPLoad.getTemplate('templates/first.html', function (response) {
+	JPLoad.loadTemplate(response, 'first-div');
+});
+```
+
+#### Asynchronous request of templates
+Templates nested are loaded after the parent.
+```javascript
+JPLoad.getTemplate('templates/first.html', function (response) {
+	JPLoad.loadTemplate(response, 'first-div');
+
+	JPLoad.getTemplate('templates/second.html', function (response) {
+		JPLoad.loadTemplate(response, 'second-div');
+	});
+});
+```
+
+#### Injecting data into our template files
+ JPLoad has support to inject data into our templates before they are being loaded into our application.
+**template.html**
+<pre>
+&lt;html>
+	&lt;title><b>{{title}}</b>&lt;/title>
+	&lt;body>
+		&lt;a href="#"><b>{{link-description}}</b>&lt;/a>
+	&lt;/body>
+&lt;/html>
+</pre>
+
+**scripts.js**
+```javascript
+JPLoad.getTemplate('templates/template.html', function (response) {
+	JPLoad.loadTemplate(response, 'id-div', {'title':'Injecting Data', 'link-description' : 'JPLoad Link'});
+});
+```
+
+**HTML DATA**
+
+<pre>
+&lt;html>
+	&lt;title><b>Injecting Data</b>&lt;/title>
+	&lt;body>
+		&lt;a href="#"><b>JPLoad Link</b>&lt;/a>
+	&lt;/body>
+&lt;/html>
+</pre>
+
+## License
+
+MIT
