@@ -8,7 +8,7 @@ JPLoad is a small library that allows you to develop fast an reliable single pag
 
 ## Getting Started
 
- To see how to use JPLoad to biuld a single web app, check out [this example](http://jpload.robertobarron.com).
+ To see how to use JPLoad to build a single web application, check out [this example](http://jpload.robertobarron.com).
 
 ## What's Included
 JPLoad does not attempt to be a full, batteries-included framework. Instead, it tries to simplify the development by allowing the developer to use the library in the most appropiate way for their application.
