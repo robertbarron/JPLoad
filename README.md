@@ -72,7 +72,7 @@ JPLoad.getTemplate('templates/first.html', function (response) {
 });
 ```
 
-#### Asynchronous request of templates
+#### Synchronous request of templates
 Templates nested are loaded after the parent.
 ```javascript
 JPLoad.getTemplate('templates/first.html', function (response) {
