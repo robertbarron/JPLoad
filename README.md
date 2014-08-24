@@ -99,7 +99,14 @@ JPLoad.getTemplate('templates/first.html', function (response) {
 **scripts.js**
 ```javascript
 JPLoad.getTemplate('templates/template.html', function (response) {
-	JPLoad.loadTemplate(response, 'id-div', {'title':'Injecting Data', 'link-description' : 'JPLoad Link'});
+	JPLoad.loadTemplate(
+		response, 
+		'id-div', 
+		{
+			'title':'Injecting Data', 
+			'link-description' : 'JPLoad Link'
+		}
+	);
 });
 ```
 
