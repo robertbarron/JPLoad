@@ -1,4 +1,4 @@
-<img src="http://images.robertobarron.com/jpload/jpload.png" width="500" height="100">
+<img src="http://images.robertobarron.com/jpload/jpload.png" width="500" height="150">
 
 JPLoad is a small library that allows you to develop fast an reliable single page website applications.
 
