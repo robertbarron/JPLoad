@@ -1,0 +1,183 @@
+
+<div class="top-panel">
+	<div class="row">
+		<h1>JP Load</h1>
+		<h2>JPLoad is a small library that allows you to develop fast an reliable single page website applications.</h2>
+	</div>
+</div>
+<div class="row content">
+	<h2>Introduction</h2>
+
+	  Currently there are many libraries/frameworks to help web developers to build single page applications. The majority of these frameworks required advanced knowledge of JavaScript and deep systems configurations. JPLoad has been created to help web developers to build single web application without having a deep understanding of Javascript.
+	<hr>
+	<h2>Getting Started</h2>
+
+	JPLoad does not attempt to be a full, batteries-included framework. Instead, it tries to simplify the development by allowing the developer to use the library in the most appropiate way for their application.
+
+	<h3> Including the library into your main html file (Usually index.html)</h3>
+	<div class="code">
+		<pre>
+&lt;html>
+	&lt;head>&lt;/head>
+	&lt;body>
+		&lt;div id="app">&lt;/div>
+		...
+		&lt;script src="js/JPLoad.min.js">&lt;/script>
+	&lt;/body>
+&lt;/html>
+		</pre>
+	</div>
+	
+	<h3>Declaring the hook</h3>
+
+	You need to declare a root element. The entire application will be created inside this element.
+	<h5> Javascript</h5>
+	<div class="code">
+		<pre>
+var hook = document.getElementById('app');
+...
+if (response) {
+	hook.innerHTML = response;
+}
+		</pre>
+	</div>
+
+	<h5> jQuery</h5>
+	<div class="code">
+		<pre>
+var hook = $('#app');
+...
+if (response) {
+	hook.html(response);
+}
+		</pre>
+	</div>
+	<h4> Requesting the template file</h4>
+
+	Template are html files that are injected into our application via Ajax.
+	<div class="code">
+		<pre>
+JPLoad.getTemplate('templates/init.html', function (response) {
+	if (response) {}  //The template data resides in the response variable.
+});
+		</pre>
+	</div>
+
+	<h4> Injecting the template file</h4>
+
+	Template data can be injected into the element with the id <b>'div-id'</b>
+	<div class="code">
+		<pre>
+JPLoad.loadTemplate(response, 'div-id');
+		</pre>
+	</div>
+
+	<h4>Asynchronous request of templates</h4>
+	Templates will be loaded as their call finished.
+	<div class="code">
+		<pre>
+JPLoad.getTemplate('templates/second.html', function (response) {
+	JPLoad.loadTemplate(response, 'second-div');
+});
+
+JPLoad.getTemplate('templates/first.html', function (response) {
+	JPLoad.loadTemplate(response, 'first-div');
+});
+		</pre>
+	</div>
+
+	<h4>Synchronous request of templates</h4>
+	Templates nested are loaded after the parent.
+	<div class="code">
+		<pre>
+JPLoad.getTemplate('templates/first.html', function (response) {
+	JPLoad.loadTemplate(response, 'first-div');
+
+	JPLoad.getTemplate('templates/second.html', function (response) {
+		JPLoad.loadTemplate(response, 'second-div');
+	});
+});
+		</pre>
+	</div>
+
+	<h4>Injecting data into our template files</h4>
+	 JPLoad has support to inject data into our templates before they are being loaded into our application.
+	<b>template.html</b>
+	<div class="code">
+		<pre>
+&lt;html>
+	&lt;title><b>{{title}}</b>&lt;/title>
+	&lt;body>
+		&lt;a href="#"><b>{{link-description}}</b>&lt;/a>
+	&lt;/body>
+&lt;/html>
+		</pre>
+	</div>
+	<b>scripts.js</b>
+	<div class="code">
+		<pre>
+JPLoad.getTemplate('templates/template.html', function (response) {
+	JPLoad.loadTemplate(
+		response, 
+		'id-div', 
+		{
+			'title':'Injecting Data', 
+			'link-description' : 'JPLoad Link'
+		}
+	);
+});
+		</pre>
+	</div>
+
+	<b>HTML DATA</b>
+	<div class="code">
+		<pre>
+&lt;html>
+	&lt;title><b>Injecting Data</b>&lt;/title>
+	&lt;body>
+		&lt;a href="#"><b>JPLoad Link</b>&lt;/a>
+	&lt;/body>
+&lt;/html>
+		</pre>
+	</div>
+	<hr>
+	<h2>Example file</h2>
+	<div class="code">
+		<pre>
+var hook = document.getElementById('app');
+
+JPLoad.getTemplate('templates/skeleton.html', function (response) {
+	if (response) {
+		hook.innerHTML = response;
+		
+		JPLoad.getTemplate('templates/first.html', function (response) {
+			JPLoad.loadTemplate(response, 'first-div');
+		});
+
+		JPLoad.getTemplate('templates/another-template.html', function (response) {
+			JPLoad.loadTemplate(response, 'second-div');
+
+			$('#documentation').on('click', function () {
+				JPLoad.getTemplate('templates/documentation.html', function (response) {
+					$('#skeleton').addClass('hidden');
+
+					$('#documentation-div').removeClass('hidden');
+					$('#documentation-div').html(response);
+				});
+			});
+		});
+	}
+});
+		</pre>
+	</div>
+	<hr>
+	<h2>Example</h2>
+	<div class="link-container">
+		<a class="button bg" href='http://jpload.robertobarron.com/jploadsite.zip'>Download this website</a>
+
+		<a href="#" class="button bg blue" id="go-back">Go Back</a>
+
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</div>
