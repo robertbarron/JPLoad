@@ -74,7 +74,12 @@ h2 {
 h3 {
 	font-size: 1em;
 }
-
+.github-image {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 0;
+}
 #skeleton {
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
