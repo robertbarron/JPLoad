@@ -66,7 +66,7 @@ JPLoad = {
             counted = 0;
 
         var waitForIt = function () {
-            for (key in pObject) {
+            for (var key in pObject) {
                 htmlData = _this.injectData(htmlData, '{{' + key + '}}', pObject[key]);
                 counted++;
             }
@@ -76,7 +76,7 @@ JPLoad = {
             } else {
                 setTimeout(function () {
                     waitForIt();
-                },20)
+                },20);
             }
         };
         waitForIt();
@@ -84,14 +84,19 @@ JPLoad = {
     loadTemplate : function (htmlData, elementID, oData, callback) {
         var _this = this;
 
-        if (oData != undefined) {
+        if (oData !== undefined) {
             _this.parseObject(oData, htmlData, elementID, function (response) {
-                if (response)
-                    if (callback)
+                if (response) {
+                    if (callback) {
                         callback(true);
+                    }
+                }
             });
         } else {
             document.getElementById(elementID).innerHTML = htmlData;
+            if (callback) {
+                callback(true);
+            }
         }
     },
 };
