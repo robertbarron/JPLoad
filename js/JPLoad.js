@@ -60,7 +60,7 @@ JPLoad = {
         return templateData.replace(new RegExp(_this.escapeRegExp(find), 'g'), replace);
     },
 
-    parseObject : function (pObject, htmlData, elementID, callback) {
+    parseObject : function (pObject, htmlData, elementID, appendFlag, callback) {
         var _this = this,
             elementsInData = Object.keys(pObject).length,
             counted = 0;
@@ -71,8 +71,16 @@ JPLoad = {
                 counted++;
             }
             if (counted >= elementsInData) {
-                document.getElementById(elementID).innerHTML = htmlData;
-                callback(true);
+                if (appendFlag) {
+                    var divHelper = document.createElement('div');
+
+                    divHelper.innerHTML = htmlData;
+                    document.getElementById(elementID).appendChild(divHelper);
+                    callback(true);
+                } else {
+                    document.getElementById(elementID).innerHTML = htmlData;
+                    callback(true);
+                }
             } else {
                 setTimeout(function () {
                     waitForIt();
@@ -85,7 +93,7 @@ JPLoad = {
         var _this = this;
 
         if (oData !== undefined) {
-            _this.parseObject(oData, htmlData, elementID, function (response) {
+            _this.parseObject(oData, htmlData, elementID, false, function (response) {
                 if (response) {
                     if (callback) {
                         callback(true);
@@ -94,6 +102,29 @@ JPLoad = {
             });
         } else {
             document.getElementById(elementID).innerHTML = htmlData;
+            if (callback) {
+                callback(true);
+            }
+        }
+    },
+
+    appendHTML : function (htmlData, elementID, oData, callback) {
+        var _this = this;
+    
+
+        if (oData !== undefined) {
+            _this.parseObject(oData, htmlData, elementID, true, function (response) {
+                if (response) {
+                    if (callback) {
+                        callback(true);
+                    }
+                }
+            });
+        } else {
+            var divHelper = document.createElement('div');
+
+            divHelper.innerHTML = htmlData;
+            document.getElementById(elementID).appendChild(divHelper);
             if (callback) {
                 callback(true);
             }
