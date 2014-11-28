@@ -48,7 +48,7 @@ if (response) {
 
 Template are html files that are injected into our application via Ajax.
 ```javascript
-JPLoad.getTemplate('templates/init.html', function (response) {
+JPLoad.getView('templates/init.html', function (response) {
 	if (response) {}  //The template data resides in the response variable.
 });
 ```
@@ -57,29 +57,29 @@ JPLoad.getTemplate('templates/init.html', function (response) {
 
 Template data can be injected into the element with the id **'div-id'**
 ```javascript
-JPLoad.loadTemplate(response, 'div-id');
+JPLoad.loadView(response, 'div-id');
 ```
 
 #### Asynchronous request of templates
 Templates will be loaded as their call finished.
 ```javascript
-JPLoad.getTemplate('templates/second.html', function (response) {
-	JPLoad.loadTemplate(response, 'second-div');
+JPLoad.getView('templates/second.html', function (response) {
+	JPLoad.loadView(response, 'second-div');
 });
 
-JPLoad.getTemplate('templates/first.html', function (response) {
-	JPLoad.loadTemplate(response, 'first-div');
+JPLoad.getView('templates/first.html', function (response) {
+	JPLoad.loadView(response, 'first-div');
 });
 ```
 
 #### Synchronous request of templates
 Templates nested are loaded after the parent.
 ```javascript
-JPLoad.getTemplate('templates/first.html', function (response) {
-	JPLoad.loadTemplate(response, 'first-div');
+JPLoad.getView('templates/first.html', function (response) {
+	JPLoad.loadView(response, 'first-div');
 
-	JPLoad.getTemplate('templates/second.html', function (response) {
-		JPLoad.loadTemplate(response, 'second-div');
+	JPLoad.getView('templates/second.html', function (response) {
+		JPLoad.loadView(response, 'second-div');
 	});
 });
 ```
@@ -98,8 +98,8 @@ JPLoad.getTemplate('templates/first.html', function (response) {
 
 **scripts.js**
 ```javascript
-JPLoad.getTemplate('templates/template.html', function (response) {
-	JPLoad.loadTemplate(
+JPLoad.getView('templates/template.html', function (response) {
+	JPLoad.loadView(
 		response, 
 		'id-div', 
 		{

@@ -57,7 +57,7 @@ if (response) {
 	Template are html files that are injected into our application via Ajax.
 	<div class="code">
 		<pre>
-JPLoad.getTemplate('templates/init.html', function (response) {
+JPLoad.getView('templates/init.html', function (response) {
 	if (response) {}  //The template data resides in the response variable.
 });
 		</pre>
@@ -68,7 +68,7 @@ JPLoad.getTemplate('templates/init.html', function (response) {
 	Template data can be injected into the element with the id <b>'div-id'</b>
 	<div class="code">
 		<pre>
-JPLoad.loadTemplate(response, 'div-id');
+JPLoad.loadView(response, 'div-id');
 		</pre>
 	</div>
 
@@ -76,12 +76,12 @@ JPLoad.loadTemplate(response, 'div-id');
 	Templates will be loaded as their call finished.
 	<div class="code">
 		<pre>
-JPLoad.getTemplate('templates/second.html', function (response) {
-	JPLoad.loadTemplate(response, 'second-div');
+JPLoad.getView('templates/second.html', function (response) {
+	JPLoad.loadView(response, 'second-div');
 });
 
-JPLoad.getTemplate('templates/first.html', function (response) {
-	JPLoad.loadTemplate(response, 'first-div');
+JPLoad.getView('templates/first.html', function (response) {
+	JPLoad.loadView(response, 'first-div');
 });
 		</pre>
 	</div>
@@ -90,11 +90,11 @@ JPLoad.getTemplate('templates/first.html', function (response) {
 	Templates nested are loaded after the parent.
 	<div class="code">
 		<pre>
-JPLoad.getTemplate('templates/first.html', function (response) {
-	JPLoad.loadTemplate(response, 'first-div');
+JPLoad.getView('templates/first.html', function (response) {
+	JPLoad.loadView(response, 'first-div');
 
-	JPLoad.getTemplate('templates/second.html', function (response) {
-		JPLoad.loadTemplate(response, 'second-div');
+	JPLoad.getView('templates/second.html', function (response) {
+		JPLoad.loadView(response, 'second-div');
 	});
 });
 		</pre>
@@ -116,8 +116,8 @@ JPLoad.getTemplate('templates/first.html', function (response) {
 	<b>scripts.js</b>
 	<div class="code">
 		<pre>
-JPLoad.getTemplate('templates/template.html', function (response) {
-	JPLoad.loadTemplate(
+JPLoad.getView('templates/template.html', function (response) {
+	JPLoad.loadView(
 		response, 
 		'id-div', 
 		{
@@ -146,19 +146,19 @@ JPLoad.getTemplate('templates/template.html', function (response) {
 		<pre>
 var hook = document.getElementById('app');
 
-JPLoad.getTemplate('templates/skeleton.html', function (response) {
+JPLoad.getView('templates/skeleton.html', function (response) {
 	if (response) {
 		hook.innerHTML = response;
 		
-		JPLoad.getTemplate('templates/first.html', function (response) {
-			JPLoad.loadTemplate(response, 'first-div');
+		JPLoad.getView('templates/first.html', function (response) {
+			JPLoad.loadView(response, 'first-div');
 		});
 
-		JPLoad.getTemplate('templates/another-template.html', function (response) {
-			JPLoad.loadTemplate(response, 'second-div');
+		JPLoad.getView('templates/another-template.html', function (response) {
+			JPLoad.loadView(response, 'second-div');
 
 			$('#documentation').on('click', function () {
-				JPLoad.getTemplate('templates/documentation.html', function (response) {
+				JPLoad.getView('templates/documentation.html', function (response) {
 					$('#skeleton').addClass('hidden');
 
 					$('#documentation-div').removeClass('hidden');

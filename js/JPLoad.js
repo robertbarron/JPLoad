@@ -86,7 +86,7 @@ JPLoad = {
         };
         _waitForIt();
     },
-    loadVew : function (htmlData, elementID, oData, callback) {
+    loadView : function (htmlData, elementID, oData, callback) {
         if (oData !== undefined) {
             this._parseObject(oData, htmlData, elementID, false, function (response) {
                 if (response) {

@@ -2,33 +2,33 @@
 
 var hook = document.getElementById('app');
 
-JPLoad.getTemplate('templates/skeleton.html', function (response) {
+JPLoad.getView('templates/skeleton.html', function (response) {
 	if (response) {
 		hook.innerHTML = response;
 		
-		JPLoad.getTemplate('templates/first.html', function (response) {
-			JPLoad.loadTemplate(response, 'first-div');
+		JPLoad.getView('templates/first.html', function (response) {
+			JPLoad.loadView(response, 'first-div');
 		});
 
-		JPLoad.getTemplate('templates/second.html', function (response) {
-			JPLoad.loadTemplate(response, 'second-div');
+		JPLoad.getView('templates/second.html', function (response) {
+			JPLoad.loadView(response, 'second-div');
 		});
 
-		JPLoad.getTemplate('templates/third.html', function (response) {
+		JPLoad.getView('templates/third.html', function (response) {
 			// JPLoad.loadTemplate(response, 'third-div', {'method':'POST', 'whara':'this'});
-			JPLoad.loadTemplate(response, 'third-div');
+			JPLoad.loadView(response, 'third-div');
 		});
 
-		JPLoad.getTemplate('templates/fourth.html', function (response) {
-			JPLoad.loadTemplate(response, 'fourth-div');
+		JPLoad.getView('templates/fourth.html', function (response) {
+			JPLoad.loadView(response, 'fourth-div');
 		});
 
-		JPLoad.getTemplate('templates/fifth.html', function (response) {
-			JPLoad.loadTemplate(response, 'fifth-div');
+		JPLoad.getView('templates/fifth.html', function (response) {
+			JPLoad.loadView(response, 'fifth-div');
 
 			//Added listener for click on the documenation button
 			document.getElementById('documentation').onclick = function () {
-				JPLoad.getTemplate('templates/documentation.html', function (response) {
+				JPLoad.getView('templates/documentation.html', function (response) {
 					document.getElementById('skeleton').className += 'hidden';
 
 					var docElement = document.getElementById('documentation-div');
