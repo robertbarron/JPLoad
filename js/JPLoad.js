@@ -113,7 +113,7 @@ JPLoad = {
             var divHelper = document.createElement('div');
 
             divHelper.innerHTML = htmlData;
-            document.getElementById(elementID).appendChild(divHelper);
+            document.getElementById(elementID).appendChild(divHelper.firstChild);
             if (callback)
                 callback(true);
         }
