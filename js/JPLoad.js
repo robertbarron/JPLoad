@@ -57,6 +57,54 @@ JPLoad = {
         return templateData.replace(new RegExp(this._escapeRegExp(find), 'g'), replace);
     },
 
+    parseElement : function (pObject, htmlData, callback) {
+        var _this = this,
+            elementsInData = Object.keys(pObject).length,
+            counted = 0;
+        
+        var _waitForIt = function () {
+                for (var key in pObject) {
+                    htmlData = _this._injectData(htmlData, '{{' + key + '}}', pObject[key]);
+                    counted++;
+                }
+                if (counted >= elementsInData) {
+                    callback(htmlData);
+                } else {
+                    setTimeout(function () {
+                        _waitForIt();
+                    },20);
+                }
+            };
+        _waitForIt();
+    },
+
+    $_parseObject : function (pObject, htmlData, $object, appendFlag, callback) {
+        var _this = this,
+            elementsInData = Object.keys(pObject).length,
+            counted = 0;
+        
+        var _waitForIt = function () {
+                for (var key in pObject) {
+                    htmlData = _this._injectData(htmlData, '{{' + key + '}}', pObject[key]);
+                    counted++;
+                }
+                if (counted >= elementsInData) {
+                    if (appendFlag) {
+                        $object.append(htmlData);
+                        callback(true);
+                    } else {
+                        $object.html(htmlData);
+                        callback(true);
+                    }
+                } else {
+                    setTimeout(function () {
+                        _waitForIt();
+                    },20);
+                }
+            };
+        _waitForIt();
+    },
+
     _parseObject : function (pObject, htmlData, elementID, appendFlag, callback) {
         var _this = this,
             elementsInData = Object.keys(pObject).length,
@@ -86,6 +134,22 @@ JPLoad = {
         };
         _waitForIt();
     },
+
+    $loadView : function(htmlData, $object, oData, callback) {
+        if (oData !== undefined) {
+            this.$_parseObject(oData, htmlData, $object, false, function (response) {
+                if (response) {
+                    if (callback)
+                        callback(true);
+                }
+            });
+        } else {
+            $object.html(htmlData);
+            if (callback)
+                callback(true);
+        }
+    },
+
     loadView : function (htmlData, elementID, oData, callback) {
         if (oData !== undefined) {
             this._parseObject(oData, htmlData, elementID, false, function (response) {
@@ -96,6 +160,21 @@ JPLoad = {
             });
         } else {
             document.getElementById(elementID).innerHTML = htmlData;
+            if (callback)
+                callback(true);
+        }
+    },
+
+    $appendView : function (htmlData, $object, oData, callback) {
+        if (oData !== undefined) {
+            this.$_parseObject(oData, htmlData, $object, true, function (response) {
+                if (response) {
+                    if (callback)
+                        callback(true);
+                }
+            });
+        } else {
+            $object.html(htmlData);
             if (callback)
                 callback(true);
         }
