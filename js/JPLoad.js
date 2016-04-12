@@ -1,5 +1,6 @@
 JPLoad = {
-    _doRequest : function (url, callback) {
+    _templates : [],
+    _doRequest : function (url, async, callback) {
         var _this = this,
             xhr;
 
@@ -38,14 +39,39 @@ JPLoad = {
                 callback(xhr.responseText);
             }           
         }
-        xhr.open('GET', url, true);
+        xhr.open('GET', url, async);
         xhr.send('');
     },
+    
+    _isLoaded: function (templateURL, callback) {
+        var _this = this;
+        if (this._templates.length <= 1) {
+            callback(false, false);
+            return;
+        }
 
-    getView : function (templateURL, callback) {
-        this._doRequest(templateURL, function (response) {
-            if (response)
-                callback(response);
+        for (var i = 0; i < this._templates.length ; i++) {
+            if (_this._templates[i].name == templateURL) {
+                callback(true, _this._templates[i].htmldata);
+                return;
+            } else if (i >= (_this._templates.length - 1) && _this._templates[i].name != templateURL)
+                callback(false, false);
+        }
+    },
+
+    getView : function (templateURL, async, callback) {
+        var _this = this;
+
+        this._isLoaded(templateURL, function (found, data) {
+            if (!found) {
+                _this._doRequest(templateURL, async, function (response) {
+                    if (response) {
+                        _this._templates.push({'name': templateURL, 'htmldata': response});
+                        callback(response);
+                    }
+                });
+            } else
+                callback(data);
         });
     },
 
@@ -72,9 +98,30 @@ JPLoad = {
                 } else {
                     setTimeout(function () {
                         _waitForIt();
-                    },20);
+                    },5);
                 }
             };
+        _waitForIt();
+    },
+
+    _concatenate: function (pObject, htmlData, callback) {
+        var _this = this,
+            elementsInData = Object.keys(pObject).length,
+            counted = 0;
+
+        var _waitForIt = function () {
+            for (var key in pObject) {
+                htmlData = _this._injectData(htmlData, '{{' + key + '}}', pObject[key]);
+                counted++;
+            }
+            if (counted >= elementsInData) {
+                callback(htmlData);
+            } else {
+                setTimeout(function () {
+                    _waitForIt();
+                },5);
+            }
+        };
         _waitForIt();
     },
 
@@ -99,7 +146,7 @@ JPLoad = {
                 } else {
                     setTimeout(function () {
                         _waitForIt();
-                    },20);
+                    },5);
                 }
             };
         _waitForIt();
@@ -129,7 +176,7 @@ JPLoad = {
             } else {
                 setTimeout(function () {
                     _waitForIt();
-                },20);
+                },5);
             }
         };
         _waitForIt();
@@ -197,4 +244,18 @@ JPLoad = {
                 callback(true);
         }
     },
+
+    concatenate: function (htmlData, data, callback) {
+        if (data != undefined) {
+            this._concatenate(data, htmlData, function (response) {
+                if (response) {
+                    if (callback)
+                        callback(response);
+                }
+            });
+        } else {
+            if (callback)
+                callback(htmlData);
+        }
+    }
 };
