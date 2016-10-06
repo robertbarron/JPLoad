@@ -1,4 +1,4 @@
-<img src="http://robertobarron.com/images/logos/jpload.jpg" width="500" height="150">
+<img src="http://robertobarron.com/images/logos/jpload.jpg" width="400" height="150">
 
 JPLoad is a small library that allows you to develop fast an reliable single page website applications.
 
@@ -88,14 +88,12 @@ JPLoad.getView('templates/first.html', function (response) {
  JPLoad has support to inject data into our templates before they are being loaded into our application.
 **template.html**
 ```
-<pre>
 <html>
 	<title><b>{{title}}</b></title>
 	<body>
 		<a href="#"><b>{{link-description}}</b></a>
 	</body>
 </html>
-</pre>
 ```
 **scripts.js (plain JavaScript)**
 ```javascript
@@ -115,14 +113,12 @@ JPLoad.getView('templates/template.html', function (response) {
 
 **HTML DATA**
 ```
-<pre>
 <html>
 	<title><b>Injecting Data</b></title>
 	<body>
 		<a href="#"><b>JPLoad Link</b></a>
 	</body>
 </html>
-</pre>
 ```
 ## License
 
