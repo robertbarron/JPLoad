@@ -1,4 +1,4 @@
-<img src="http://images.robertobarron.com/jpload/jpload.png" width="500" height="150">
+<img src="http://robertobarron.com/images/logos/jpload.jpg" width="500" height="150">
 
 JPLoad is a small library that allows you to develop fast an reliable single page website applications.
 
@@ -87,6 +87,7 @@ JPLoad.getView('templates/first.html', function (response) {
 #### Injecting data into our template files
  JPLoad has support to inject data into our templates before they are being loaded into our application.
 **template.html**
+```
 <pre>
 &lt;html>
 	&lt;title><b>{{title}}</b>&lt;/title>
@@ -95,23 +96,25 @@ JPLoad.getView('templates/first.html', function (response) {
 	&lt;/body>
 &lt;/html>
 </pre>
-
-**scripts.js**
+```
+**scripts.js (plain JavaScript)**
 ```javascript
+var data = {'title': 'Injecting data', 'link-description': 'JPLoad Link'};
 JPLoad.getView('templates/template.html', function (response) {
-	JPLoad.loadView(
-		response, 
-		'id-div', 
-		{
-			'title':'Injecting Data', 
-			'link-description' : 'JPLoad Link'
-		}
-	);
+	JPLoad.loadView(response, 'id-div', data);
+});
+```
+**script.js (jQuery)**
+```javascript
+var data = {'title': 'Injecting data', 'link-description': 'JPLoad Link'};
+var $id = $('id-div');
+JPLoad.getView('templates/template.html', function (response) {
+	JPLoad.loadView(response, $id, data);
 });
 ```
 
 **HTML DATA**
-
+```
 <pre>
 &lt;html>
 	&lt;title><b>Injecting Data</b>&lt;/title>
@@ -120,7 +123,7 @@ JPLoad.getView('templates/template.html', function (response) {
 	&lt;/body>
 &lt;/html>
 </pre>
-
+```
 ## License
 
 MIT
