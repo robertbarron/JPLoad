@@ -89,12 +89,12 @@ JPLoad.getView('templates/first.html', function (response) {
 **template.html**
 ```
 <pre>
-&lt;html>
-	&lt;title><b>{{title}}</b>&lt;/title>
-	&lt;body>
-		&lt;a href="#"><b>{{link-description}}</b>&lt;/a>
-	&lt;/body>
-&lt;/html>
+<html>
+	<title><b>{{title}}</b></title>
+	<body>
+		<a href="#"><b>{{link-description}}</b></a>
+	</body>
+</html>
 </pre>
 ```
 **scripts.js (plain JavaScript)**
@@ -116,12 +116,12 @@ JPLoad.getView('templates/template.html', function (response) {
 **HTML DATA**
 ```
 <pre>
-&lt;html>
-	&lt;title><b>Injecting Data</b>&lt;/title>
-	&lt;body>
-		&lt;a href="#"><b>JPLoad Link</b>&lt;/a>
-	&lt;/body>
-&lt;/html>
+<html>
+	<title><b>Injecting Data</b></title>
+	<body>
+		<a href="#"><b>JPLoad Link</b></a>
+	</body>
+</html>
 </pre>
 ```
 ## License
