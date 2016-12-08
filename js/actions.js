@@ -22,7 +22,9 @@ JPLoad.getView('templates/skeleton.html', function (response) {
 		JPLoad.getView('templates/fourth.html', function (response) {
 			JPLoad.loadView(response, 'fourth-div');
 		});
-
+		JPLoad.getView('templates/node-ready.html', function (response) {
+			JPLoad.loadView(response, 'node-ready');
+		});
 		JPLoad.getView('templates/fifth.html', function (response) {
 			JPLoad.loadView(response, 'fifth-div');
 
